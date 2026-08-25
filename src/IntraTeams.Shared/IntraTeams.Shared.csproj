@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--
+      net10.0 to match the WPF client's net10.0-windows target. Plain .NET,
+      no Windows-specific API, so the server can reference it too.
+      This project needs no NuGet packages.
+    -->
+    <TargetFramework>net10.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>IntraTeams.Shared</RootNamespace>
+  </PropertyGroup>
+
+</Project>

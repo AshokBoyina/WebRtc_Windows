@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!--
+      net10.0-windows10.0.17763.0 is forced by SIPSorceryMedia.Windows 10.x,
+      which ships that single target framework and no other. Do not lower it
+      without also downgrading the whole SIPSorcery family - see README.
+    -->
+    <TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>IntraTeams.Client</RootNamespace>
+    <AssemblyName>IntraTeams</AssemblyName>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- Screen capture must see true pixels, not a DPI-virtualised surface. -->
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- WebRTC: RTCPeerConnection, ICE, DTLS-SRTP, RTP, SDP. -->
+    <PackageReference Include="SIPSorcery" Version="10.0.16" />
+
+    <!--
+      Windows media devices: microphone + speaker (via NAudio) and webcam
+      capture (via Media Foundation). Note this package has NO screen capture -
+      that is why Media/GdiScreenCapture.cs exists.
+    -->
+    <PackageReference Include="SIPSorceryMedia.Windows" Version="10.0.15" />
+
+    <!--
+      Pure-managed VP8 encoder/decoder. Chosen over SIPSorceryMedia.FFmpeg so
+      the app has no native binaries to deploy and no FFmpeg install step.
+      See README "Swapping the video codec" to move to FFmpeg for better
+      compression if screen-share quality is not good enough.
+    -->
+    <PackageReference Include="SIPSorcery.VP8" Version="10.0.16" />
+
+    <!-- Signaling transport. -->
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IntraTeams.Shared\IntraTeams.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

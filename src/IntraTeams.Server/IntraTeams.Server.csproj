@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <!--
+      net10.0, matching IntraTeams.Shared. A net8.0 project cannot reference a
+      net10.0 library, so these two move together.
+      SignalR ships inside the Microsoft.AspNetCore.App shared framework, so
+      this project still needs no NuGet packages at all.
+    -->
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>IntraTeams.Server</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IntraTeams.Shared\IntraTeams.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

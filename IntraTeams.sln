@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A52B6AA9-7F42-4C47-BDC4-6344CDBB1AD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntraTeams.Shared", "src\IntraTeams.Shared\IntraTeams.Shared.csproj", "{8D6C566F-CF2C-4AD5-B7C6-28B55B66E3BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntraTeams.Server", "src\IntraTeams.Server\IntraTeams.Server.csproj", "{3C578E5D-3639-4FBE-8395-CBD77DABAE9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntraTeams.Client", "src\IntraTeams.Client\IntraTeams.Client.csproj", "{7B1E9F44-2C6D-4A8E-9E31-0D5A2C8F41B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1C504CED-772B-4998-A140-D5D7CAA3B6A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntraTeams.HubSmokeTest", "tests\IntraTeams.HubSmokeTest\IntraTeams.HubSmokeTest.csproj", "{624A448A-E3DA-4DF4-8928-8268EAE0E84E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8D6C566F-CF2C-4AD5-B7C6-28B55B66E3BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6C566F-CF2C-4AD5-B7C6-28B55B66E3BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6C566F-CF2C-4AD5-B7C6-28B55B66E3BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6C566F-CF2C-4AD5-B7C6-28B55B66E3BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C578E5D-3639-4FBE-8395-CBD77DABAE9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C578E5D-3639-4FBE-8395-CBD77DABAE9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C578E5D-3639-4FBE-8395-CBD77DABAE9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C578E5D-3639-4FBE-8395-CBD77DABAE9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B1E9F44-2C6D-4A8E-9E31-0D5A2C8F41B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B1E9F44-2C6D-4A8E-9E31-0D5A2C8F41B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B1E9F44-2C6D-4A8E-9E31-0D5A2C8F41B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B1E9F44-2C6D-4A8E-9E31-0D5A2C8F41B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624A448A-E3DA-4DF4-8928-8268EAE0E84E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624A448A-E3DA-4DF4-8928-8268EAE0E84E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624A448A-E3DA-4DF4-8928-8268EAE0E84E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624A448A-E3DA-4DF4-8928-8268EAE0E84E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8D6C566F-CF2C-4AD5-B7C6-28B55B66E3BB} = {A52B6AA9-7F42-4C47-BDC4-6344CDBB1AD9}
+		{3C578E5D-3639-4FBE-8395-CBD77DABAE9E} = {A52B6AA9-7F42-4C47-BDC4-6344CDBB1AD9}
+		{7B1E9F44-2C6D-4A8E-9E31-0D5A2C8F41B2} = {A52B6AA9-7F42-4C47-BDC4-6344CDBB1AD9}
+		{624A448A-E3DA-4DF4-8928-8268EAE0E84E} = {1C504CED-772B-4998-A140-D5D7CAA3B6A7}
+	EndGlobalSection
+EndGlobal

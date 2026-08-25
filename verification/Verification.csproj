@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    BUILD-TIME VERIFICATION HARNESS. Not shipped, not part of IntraTeams.sln.
+
+    Compiles the non-WPF half of the client against stub declarations of the
+    third-party API, on a machine that cannot restore those NuGet packages.
+    Catches ordinary C# errors; proves nothing about runtime behaviour.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>IntraTeams.Verification</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <NoWarn>$(NoWarn);CA1416</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ApiShims.cs" />
+    <Compile Include="WpfShims.cs" />
+
+    <!-- Client sources that do not depend on WPF. -->
+    <Compile Include="..\src\IntraTeams.Client\Infrastructure\AppConfig.cs" Link="AppConfig.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Infrastructure\ObservableObject.cs" Link="ObservableObject.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Infrastructure\RelayCommand.cs" Link="RelayCommand.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Media\GdiScreenCapture.cs" Link="GdiScreenCapture.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Media\MediaStack.cs" Link="MediaStack.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Rtc\PeerSession.cs" Link="PeerSession.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Signaling\SignalingClient.cs" Link="SignalingClient.cs" />
+    <Compile Include="..\src\IntraTeams.Client\ViewModels\UserItemViewModel.cs" Link="UserItemViewModel.cs" />
+    <Compile Include="..\src\IntraTeams.Client\ViewModels\ChatEntryViewModel.cs" Link="ChatEntryViewModel.cs" />
+    <Compile Include="..\src\IntraTeams.Client\ViewModels\MainViewModel.cs" Link="MainViewModel.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Media\VideoSurface.cs" Link="VideoSurface.cs" />
+    <Compile Include="..\src\IntraTeams.Client\Infrastructure\Converters.cs" Link="Converters.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\IntraTeams.Shared\IntraTeams.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
