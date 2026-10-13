@@ -1,0 +1,79 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <!--
+      Same target framework as the WPF client, and for the same reason:
+      SIPSorceryMedia.Windows 10.x ships net10.0-windows10.0.17763.0 only.
+    -->
+    <TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <RootNamespace>IntraTeams.WinForms</RootNamespace>
+    <AssemblyName>IntraTeams.WinForms</AssemblyName>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Platforms>AnyCPU;x64</Platforms>
+
+    <!--
+      Read by ApplicationConfiguration.Initialize() in Program.cs.
+      PerMonitorV2 matters for screen sharing: without it Windows hands the GDI
+      capture a virtualised, blurry, wrongly sized desktop on scaled displays.
+    -->
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <ApplicationVisualStyles>true</ApplicationVisualStyles>
+    <ApplicationUseCompatibleTextRendering>false</ApplicationUseCompatibleTextRendering>
+    <ApplicationDefaultFont>Segoe UI, 9pt</ApplicationDefaultFont>
+
+    <!--
+      Implicit usings are switched off and the base set is listed explicitly
+      below. With UseWindowsForms the SDK would otherwise also add global
+      usings for System.Drawing and System.Windows.Forms, which the linked
+      WPF-client files were never compiled against. Listing the set by hand
+      means those files compile here exactly as they do in IntraTeams.Client.
+    -->
+    <ImplicitUsings>disable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.IO" />
+    <Using Include="System.Linq" />
+    <Using Include="System.Net.Http" />
+    <Using Include="System.Threading" />
+    <Using Include="System.Threading.Tasks" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Identical versions to IntraTeams.Client - see the README version matrix. -->
+    <PackageReference Include="SIPSorcery" Version="10.0.16" />
+    <PackageReference Include="SIPSorceryMedia.Windows" Version="10.0.15" />
+    <PackageReference Include="SIPSorcery.VP8" Version="10.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IntraTeams.Shared\IntraTeams.Shared.csproj" />
+  </ItemGroup>
+
+  <!--
+    UI-agnostic engine shared with the WPF client. These files are LINKED, not
+    copied: one source of truth, so a media or signaling fix lands in both
+    clients. None of them reference WPF. They keep their IntraTeams.Client.*
+    namespaces. They appear under "Linked" in Solution Explorer.
+  -->
+  <ItemGroup>
+    <Compile Include="..\IntraTeams.Client\Infrastructure\AppConfig.cs" Link="Linked\AppConfig.cs" />
+    <Compile Include="..\IntraTeams.Client\Signaling\SignalingClient.cs" Link="Linked\SignalingClient.cs" />
+    <Compile Include="..\IntraTeams.Client\Rtc\PeerSession.cs" Link="Linked\PeerSession.cs" />
+    <Compile Include="..\IntraTeams.Client\Media\MediaStack.cs" Link="Linked\MediaStack.cs" />
+    <Compile Include="..\IntraTeams.Client\Media\GdiScreenCapture.cs" Link="Linked\GdiScreenCapture.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
