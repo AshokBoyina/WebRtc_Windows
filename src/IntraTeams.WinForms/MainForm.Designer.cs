@@ -191,19 +191,21 @@ namespace IntraTeams.WinForms
             splitCallChat.Location = new System.Drawing.Point(0, 0);
             splitCallChat.Name = "splitCallChat";
             //
-            // splitCallChat.Panel1  (the media user control)
+            // splitCallChat.Panel1  (chat - always visible, fills the space)
             //
-            splitCallChat.Panel1.Controls.Add(callControl);
-            splitCallChat.Panel1MinSize = 420;
+            splitCallChat.Panel1.Controls.Add(rtbChat);
+            splitCallChat.Panel1.Controls.Add(pnlChatInput);
+            splitCallChat.Panel1.Controls.Add(lblChatHeader);
+            splitCallChat.Panel1MinSize = 260;
             //
-            // splitCallChat.Panel2  (chat)
+            // splitCallChat.Panel2  (the media user control - collapsed until a call
+            // starts; MainForm.ShowCallPane opens it to the right of the chat)
             //
-            splitCallChat.Panel2.Controls.Add(rtbChat);
-            splitCallChat.Panel2.Controls.Add(pnlChatInput);
-            splitCallChat.Panel2.Controls.Add(lblChatHeader);
-            splitCallChat.Panel2MinSize = 260;
+            splitCallChat.Panel2.Controls.Add(callControl);
+            splitCallChat.Panel2Collapsed = true;
+            splitCallChat.Panel2MinSize = 420;
             splitCallChat.Size = new System.Drawing.Size(1026, 738);
-            splitCallChat.SplitterDistance = 680;
+            splitCallChat.SplitterDistance = 340;
             splitCallChat.TabIndex = 0;
             //
             // callControl
@@ -211,7 +213,7 @@ namespace IntraTeams.WinForms
             callControl.Dock = System.Windows.Forms.DockStyle.Fill;
             callControl.Location = new System.Drawing.Point(0, 0);
             callControl.Name = "callControl";
-            callControl.Size = new System.Drawing.Size(680, 738);
+            callControl.Size = new System.Drawing.Size(682, 738);
             callControl.TabIndex = 0;
             //
             // rtbChat

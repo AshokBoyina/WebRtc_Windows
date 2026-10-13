@@ -64,7 +64,7 @@ each other, and only after the hub has helped them find each other.
 
 ## 2. CallControl API contract
 
-The whole contract is five methods in and five events out. Everything a wrapper does goes
+The whole contract is six methods in and five events out. Everything a wrapper does goes
 through these.
 
 ### Methods the wrapper calls (always on the UI thread)
@@ -77,6 +77,7 @@ through these.
 | `ApplyRemoteDescriptionAsync(type, sdp)` | Both | When the peer's offer or answer arrives | Applies it; for an offer, also raises `LocalSdpReady` with an **answer** |
 | `AddRemoteIceCandidate(candidate, sdpMid, sdpMLineIndex, usernameFragment)` | Both | Each time a peer candidate arrives | Adds it, or queues it until the remote description is set |
 | `EndCallAsync(statusText)` | Both | Whenever the call ends, for any reason | Closes the peer connection and every device; safe to call when idle |
+| `ShowStatus(text)` | Either (optional) | Before a session exists, e.g. while an outgoing call rings | Sets the status line; ignored once a session exists |
 
 ### Events the control raises (always on the UI thread)
 

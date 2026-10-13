@@ -4,13 +4,20 @@ A second desktop client for the same `IntraTeams.Server`. It interoperates with 
 client: a WinForms user can chat with and call a WPF user, and vice versa. The protocol,
 ICE policy (no STUN, no TURN, host candidates only) and codecs are identical.
 
+## Layout
+
+People list on the left, chat in the main area. The call pane (`CallControl`) is hidden until a
+call starts: it opens to the right of the chat when you click a person's audio/video icon, or
+when you accept an incoming call, and closes again when the call ends. The chat keeps about
+360 px while a call is open; the video takes the rest, and the splitter can be dragged.
+
 ## Shape
 
 ```
 MainForm  (wrapper / mediator)            owns the ONE SignalR connection
 ├─ People list, each row with its own audio & video call icons
-├─ Chat pane                              chat handled by the form itself
-├─ CallControl  (UserControl)             audio, video, screen share via SIPSorcery
+├─ Chat pane (main area)                 chat handled by the form itself
+├─ CallControl  (UserControl, right of chat, only during a call)  audio, video, screen share
 │    ├─ VideoView remote (fill)            knows nothing about SignalR
 │    ├─ VideoView local  (picture-in-picture)
 │    └─ Mute / Start video / Share screen / Hang up

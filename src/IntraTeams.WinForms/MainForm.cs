@@ -631,6 +631,7 @@ public partial class MainForm : Form
         _earlyRemoteCandidates.Clear();
 
         SetCallState(WrapperCallState.Dialing, $"Calling {_peerName}...");
+        callControl.ShowStatus($"Calling {_peerName}... (Cancel call is under the people list)");
         Log($"Inviting {_peerName} (video={withVideo}).");
 
         var callId = _callId;
@@ -1077,9 +1078,54 @@ public partial class MainForm : Form
             ringTimer.Stop();
         }
 
+        // The call pane exists only while a call does: it opens when the user
+        // clicks a call icon (Dialing) or accepts (Connecting), and closes when
+        // the call ends. While ringing in, the incoming-call dialog is enough.
+        ShowCallPane(state is WrapperCallState.Dialing or WrapperCallState.Connecting or WrapperCallState.InCall);
+
         SetStatus(statusText);
         UpdateCommands();
         UpdateChatHeader();
+    }
+
+    /// <summary>Preferred chat width while the call pane is open; the call gets the rest.</summary>
+    private const int ChatWidthDuringCall = 360;
+
+    /// <summary>
+    /// Opens or closes the call pane to the right of the chat. When it opens,
+    /// the chat keeps about <see cref="ChatWidthDuringCall"/> pixels and the
+    /// video takes the remaining width.
+    /// </summary>
+    private void ShowCallPane(bool show)
+    {
+        if (splitCallChat.Panel2Collapsed == !show)
+        {
+            return;
+        }
+
+        if (!show)
+        {
+            splitCallChat.Panel2Collapsed = true;
+            return;
+        }
+
+        splitCallChat.Panel2Collapsed = false;
+
+        var width = splitCallChat.ClientSize.Width;
+        var max = width - splitCallChat.Panel2MinSize - splitCallChat.SplitterWidth;
+        var distance = Math.Min(LogicalToDeviceUnits(ChatWidthDuringCall), max);
+
+        if (distance >= splitCallChat.Panel1MinSize)
+        {
+            try
+            {
+                splitCallChat.SplitterDistance = distance;
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // Window too narrow for both minimums; WinForms keeps its own split.
+            }
+        }
     }
 
     // =================================================================

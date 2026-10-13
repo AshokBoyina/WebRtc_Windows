@@ -207,6 +207,21 @@ public partial class CallControl : UserControl
         _peer?.AddRemoteIceCandidate(candidate, sdpMid, sdpMLineIndex, usernameFragment);
     }
 
+    /// <summary>
+    /// Sets the status line while there is no media session yet - for example
+    /// "Calling Ashok..." while an outgoing call rings. Once a session exists
+    /// the control manages the status line itself.
+    /// </summary>
+    public void ShowStatus(string text)
+    {
+        EnsureUiThread();
+
+        if (_peer is null)
+        {
+            lblStatus.Text = text ?? string.Empty;
+        }
+    }
+
     /// <summary>Closes the peer connection and every device. Safe to call when idle.</summary>
     public async Task EndCallAsync(string? statusText = null)
     {
